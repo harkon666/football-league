@@ -4,11 +4,9 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
-app.use(cors);
-
-//import routes here
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -18,5 +16,6 @@ app.use(express.json());
 routes(app);
 
 //listen port here
-console.log(`great you have connected, started on port: ${port}`);
-app.listen(port);
+app.listen(port, () =>
+  console.log(`great you have connected, started on port: ${port}`)
+);
