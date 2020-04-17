@@ -1,4 +1,5 @@
 require("dotenv").config();
+const routes = require("./routes");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 //use routes here
-app.use("/api");
+routes(app);
 
 //listen port here
 console.log(`great you have connected, started on port: ${port}`);
