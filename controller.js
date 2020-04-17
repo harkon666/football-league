@@ -3,7 +3,6 @@ const ClubStanding = models.clubstanding;
 
 exports.leagueStandings = async (req, res) => {
   try {
-    console.log("woi");
     const data = await ClubStanding.findAll({
       attributes: { exclude: ["id", "createdAt", "updatedAt"] },
     });
@@ -13,3 +12,5 @@ exports.leagueStandings = async (req, res) => {
     return res.status(400).json({ message: error.name });
   }
 };
+
+exports.recordGame = async (req, res) => {};
