@@ -1,7 +1,7 @@
 const models = require("./models");
 const ClubStanding = models.clubstanding;
 
-exports.AllLeagueStandings = async (req, res) => {
+exports.leagueStandings = async (req, res) => {
   try {
     console.log("woi");
     const data = await ClubStanding.findAll({
