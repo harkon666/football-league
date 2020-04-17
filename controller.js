@@ -5,7 +5,7 @@ exports.AllLeagueStandings = async (req, res) => {
   try {
     console.log("woi");
     const data = await ClubStanding.findAll({
-      attributes: { exclude: ["createdAt, updatedAt"] },
+      attributes: { exclude: ["id", "createdAt", "updatedAt"] },
     });
     return res.status(200).json({ status: "success", statusCode: 200, data });
   } catch (error) {
