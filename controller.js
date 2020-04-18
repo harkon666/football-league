@@ -79,7 +79,6 @@ exports.rank = async (req, res) => {
       raw: true,
       order: [["points", "DESC"]],
     });
-    // console.log(result);
     result.forEach((element, i) => {
       standing++;
       if (i > 0 && result[i].points === result[i - 1].points) {
@@ -90,7 +89,8 @@ exports.rank = async (req, res) => {
         data.standing = standing;
       }
     });
-    if (!data.standing || data.clubname)
+
+    if (!data.standing || !data.clubname)
       return res.status(404).json({
         status: "not found",
         error: 404,
