@@ -1,7 +1,5 @@
 const models = require("./models");
 const ClubStanding = models.clubstanding;
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
 
 exports.leagueStandings = async (req, res) => {
   try {
