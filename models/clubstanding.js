@@ -3,8 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const clubstanding = sequelize.define(
     "clubstanding",
     {
-      clubname:
-        DataTypes.STRING + " CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'",
+      clubname: DataTypes.STRING,
       points: DataTypes.INTEGER,
     },
     {

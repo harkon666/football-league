@@ -5,6 +5,7 @@ const Op = Sequelize.Op;
 
 exports.leagueStandings = async (req, res) => {
   try {
+    //find all data order by point DESC
     const data = await ClubStanding.findAll({
       attributes: { exclude: ["id", "createdAt", "updatedAt"] },
       order: [["points", "DESC"]],
