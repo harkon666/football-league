@@ -44,13 +44,17 @@ exports.recordGame = async (req, res) => {
     });
 
     if (check.length < 2 && points === 1)
-      return res
-        .status(404)
-        .json({ status: "not found", error: "name is not match" });
+      return res.status(404).json({
+        status: "not found",
+        error: 404,
+        message: "clubname not match, please see LeagueStanding API again",
+      });
     if (check.length < 1 && points === 3)
-      return res
-        .status(404)
-        .json({ status: "not found", error: "name is not match" });
+      return res.status(404).json({
+        status: "not found",
+        error: 404,
+        message: "clubname not match, please see LeagueStanding API again",
+      });
 
     //if correct then update point
     await ClubStanding.increment("points", {
@@ -69,5 +73,35 @@ exports.recordGame = async (req, res) => {
 
 exports.rank = async (req, res) => {
   try {
-  } catch (error) {}
+    const { clubname } = req.query;
+    console.log(clubname, "woi");
+    let data = {},
+      standing = 0;
+    const result = await ClubStanding.findAll({
+      raw: true,
+      order: [["points", "DESC"]],
+    });
+    // console.log(result);
+    result.forEach((element, i) => {
+      standing++;
+      if (i > 0 && result[i].points === result[i - 1].points) {
+        standing--;
+      }
+      if (clubname === element.clubname) {
+        data.clubname = element.clubname;
+        data.standing = standing;
+      }
+    });
+    if (!data.standing || data.clubname)
+      return res.status(404).json({
+        status: "not found",
+        error: 404,
+        message:
+          "Maybe Dont use quotation mark in query, and see LeagueStanding API again ",
+      });
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: error.name });
+  }
 };
